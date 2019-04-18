@@ -3,11 +3,11 @@ syntax = "proto3";
 
 service Echolalia {
     rpc Echo (HelloRequest) returns (HelloReply);
-    rpc Palindrome(HelloRequest) returns (HelloReply);
+    // rpc Palindrome(HelloRequest) returns (HelloReply);
 }
 
 message HelloRequest {
-    string name = 1;
+    string message = 1;
 }
 
 message HelloReply {
