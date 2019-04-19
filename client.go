@@ -1,15 +1,16 @@
 package main
 
 import (
+	"log"
 	"context"
 	"time"
 	"google.golang.org/grpc"
-	pb "where/echolalia/.go/lives"
+	pb "github.com/gjohnson/echolalia"
 )
 
 const (
 	address	= "localhost:50051"
-	message = "Hello there!"
+	message = "race"
 )
 
 func main() {
@@ -19,10 +20,10 @@ func main() {
 	}
 	defer conn.Close()
 	c := pb.NewEcholaliaClient(conn)
-	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	r, err := c.SayHello(ctx, &pb.HelloRequest{Message: message})
+	r, err := c.Palindrome(ctx, &pb.HelloRequest{Message: message})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
